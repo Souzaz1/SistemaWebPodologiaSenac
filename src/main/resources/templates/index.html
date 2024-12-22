@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title th:text="${title}">Podologia - Cuidando dos seus pés</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            /* CSS customizado */
+            body {
+                background-color: #ffffff; /* Cor de fundo branca */
+                color: #333; /* Texto principal em cinza escuro */
+                font-family: Arial, sans-serif;
+            }
+
+            .navbar {
+                background-color: rgba(242, 242, 242, 0.9); /* Fundo cinza claro com transparência */
+                color: #333;
+                position: relative; /* Para permitir sobreposição */
+                z-index: 1000; /* Garante que o navbar fique acima da imagem */
+            }
+
+            .navbar .navbar-brand, .navbar .nav-link {
+                color: #333; /* Texto escuro */
+            }
+
+            .navbar .nav-link:hover {
+                color: #4CAF50; /* Detalhes verdes no hover */
+            }
+
+            .hero-section {
+                background-color: #f2f2f2; /* Fundo cinza claro */
+                color: #333; /* Texto escuro */
+                padding: 100px 0;
+                position: relative; /* Para permitir sobreposição */
+                overflow: hidden; /* Esconde o excesso da imagem */
+            }
+
+            .hero-section img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 10px;
+                position: absolute; /* Posiciona a imagem absolutamente */
+                top: 0; /* Coloca a imagem no topo */
+                right: 0; /* Alinha a imagem à direita */
+                z-index: 1; /* Coloca a imagem abaixo do texto */
+                transform: translateY(-20%); /* Move a imagem para cima */
+            }
+
+            .hero-content {
+                position: relative; /* Para permitir sobreposição */
+                z-index: 2; /* Garante que o texto fique acima da imagem */
+            }
+
+            .btn {
+                background-color: #4CAF50; /* Verde para botões */
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            .btn:hover {
+                background-color: #45a049; /* Verde mais escuro no hover */
+            }
+
+            a {
+                color: #4CAF50; /* Links verdes */
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline; /* Sublinhado no hover */
+            }
+
+            .section {
+                background-color: #f7f7f7; /* Cor cinza muito claro */
+                padding: 50px 0;
+            }
+
+            h1, h2, h3 {
+                color: #333; /* Títulos em cinza escuro */
+            }
+
+            .card {
+                background-color: #ffffff; /* Cor branca para os cards */
+                border: 1px solid #ddd; /* Borda leve em cinza */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombras sutis */
+                border-radius: 8px;
+            }
+
+            .card-header {
+                background-color: #4CAF50; /* Verde para cabeçalho de cards */
+                color: white;
+            }
+
+            input, textarea, select {
+                background-color: #f2f2f2; /* Fundo cinza claro para inputs */
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            input:focus, textarea:focus, select:focus {
+                border-color: #4CAF50; /* Verde no foco */
+            }
+
+            /* Ajustes para o carrossel */
+            .carousel-item img {
+                height: 400px; /* Diminui a altura das imagens */
+                width: 100%; /* Largura total */
+                object-fit: cover; /* Mantém a proporção e cobre o espaço */
+                border-radius: 10px; /* Bordas arredondadas */
+            }
+
+            .carousel-caption {
+                background: rgba(0, 0, 0, 0.7); /* Fundo mais opaco para melhorar a legibilidade */
+                border-radius: 10px;
+                padding: 20px;
+                color: #fff;
+            }
+
+            .carousel-caption h5 {
+                font-size: 1.5rem; /* Reduz o tamanho do título */
+                font-weight: 700;
+                color: #fff;
+            }
+
+            .carousel-caption p {
+                font-size: 1rem; /* Reduz o tamanho da descrição */
+                color: #fff;
+                margin-top: 10px;
+            }
+
+            footer {
+                background: #343a40;
+                color: #fff;
+                padding: 40px 0;
+                text-align: center;
+                font-size: 1.1rem;
+                letter-spacing: 0.5px;
+                margin-top: 100px; /* Aumenta o espaço entre o carrossel e o footer */
+            }
+
+            footer a {
+                color: #ffc107;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            footer a:hover {
+                color: #ff6347;
+            }
+
+            @media (max-width: 768px) {
+                .hero h1 {
+                    font-size: 2.5rem;
+                }
+                .hero .btn {
+                    font-size: 1.1rem;
+                    padding: 12px 30px;
+                }
+                .services-section h2 {
+                    font-size: 2rem;
+                }
+                .carousel-item img {
+                    height: 300px; /* Altura menor para telas menores */
+                }
+                .carousel-caption h5 {
+                    font-size: 1.2rem;
+                }
+                .carousel-caption p {
+                    font-size: 0.9rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">Perfil dos Pés</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/sobre" th:href="@{/sobre}">Sobre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/servicos" th:href="@{/servicos}">Serviços</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/contato" th:href="@{/contato}">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <!-- Imagem que parece sair do navbar -->
+            <img th:src="@{/imagens/pés-removebg-preview.png}" alt="Imagem de exemplo" class="img-fluid">
+            <div class="container hero-content">
+                <div class="row align-items-center">
+                    <!-- Texto à esquerda -->
+                    <div class="col-md-6">
+                        <h1 th:text="${subtitle}">Cuidando do bem-estar dos seus pés</h1>
+                        <a href="/contato" th:href="@{/contato}" class="btn btn-primary">Fale Conosco</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Serviços -->
+        <section class="section">
+            <div class="container">
+                <!-- Link para a página de serviços -->
+                <a href="/servicos" th:href="@{/servicos}" style="text-decoration: none;">
+                    <!-- Carrossel de Serviços -->
+                    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+                        <div class="carousel-inner">
+                            <!-- Itera sobre os itens do carrossel -->
+                            <div class="carousel-item" th:each="item, iterStat : ${carouselItems}" th:classappend="${iterStat.first} ? 'active' : ''">
+                                <img th:src="@{${item.imageUrl}}" class="d-block w-100" th:alt="${item.title}">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5 th:text="${item.title}">Título da Imagem</h5>
+                                    <p th:text="${item.description}">Descrição da Imagem</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 Podologia. Todos os direitos reservados.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="/politica-privacidade" th:href="@{/politica-privacidade}">Política de Privacidade</a></li>
+                <li class="list-inline-item"><a href="/termos" th:href="@{/termos}">Termos de Serviço</a></li>
+            </ul>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
