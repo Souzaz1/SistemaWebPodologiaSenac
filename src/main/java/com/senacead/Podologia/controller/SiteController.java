@@ -72,4 +72,53 @@ public class SiteController {
         model.addAttribute("description", "Fale conosco para agendar uma consulta ou tirar dúvidas.");
         return "contato"; // Página de contato
     }
+
+    @GetMapping("/Onicomicose")
+    public String onicomicose(Model model) {
+        model.addAttribute("title", "Onicomicose - Tratamento de Fungos nas Unhas");
+        model.addAttribute("description", "A onicomicose é uma infecção fúngica que afeta as unhas. Saiba mais sobre os sintomas, tratamentos e prevenção.");
+        return "Onicomicose"; // Nome do template HTML que será renderizado
+    }
+
+    @GetMapping("/Reflexologia")
+    public String reflexologia(Model model) {
+        model.addAttribute("title", "Reflexologia - Equilíbrio e Bem-Estar");
+        model.addAttribute("description", "A reflexologia é uma técnica terapêutica que promove o equilíbrio e a saúde do corpo através da estimulação de pontos específicos nos pés.");
+        return "Reflexologia"; // Nome do template HTML que será renderizado
+    }
+
+    @GetMapping("/Calosidade")
+    public String calosidade(Model model) {
+        model.addAttribute("title", "Calosidade - Tratamento e Prevenção");
+        model.addAttribute("description", "A calosidade é uma área de pele espessada que se forma devido ao atrito ou pressão. Saiba mais sobre os tratamentos e cuidados preventivos.");
+        return "Calosidade"; // Nome do template HTML que será renderizado
+    }
+
+    @GetMapping("/PodologiaPreventiva")
+    public String podologiaPreventiva(Model model) {
+        model.addAttribute("title", "Podologia Preventiva - Cuidados com os Pés");
+        model.addAttribute("description", "A podologia preventiva visa manter a saúde dos pés, evitando problemas como calos, unhas encravadas e infecções.");
+        return "Podologia Preventiva"; // Nome do template HTML que será renderizado
+    }
+
+    @GetMapping("/UnhaEncravada")
+    public String unhaEncravada(Model model) {
+        model.addAttribute("title", "Unha Encravada - Tratamento e Prevenção");
+        model.addAttribute("description", "A unha encravada ocorre quando a unha cresce e penetra na pele ao redor. Saiba mais sobre os tratamentos e cuidados preventivos.");
+        return "UnhaEncravada"; // Nome do template HTML que será renderizado
+    }
+
+    @GetMapping("/OrteseUnha")
+    public String orteseUnha(Model model) {
+        model.addAttribute("title", "Órtese para Unhas - Correção e Tratamento");
+        model.addAttribute("description", "A órtese para unhas é um dispositivo utilizado para corrigir unhas encravadas e deformidades ungueais de forma não cirúrgica.");
+        return "OrteseUnha"; // Nome do template HTML que será renderizado
+    }
+
+    @GetMapping("/VerrugaPlantar")
+    public String verrugaPlantar(Model model) {
+        model.addAttribute("title", "Verruga Plantar - Tratamento e Cuidados");
+        model.addAttribute("description", "A verruga plantar é uma lesão causada pelo vírus HPV que aparece na sola dos pés. Conheça os sintomas, tratamentos e prevenção.");
+        return "VerrugaPlantar"; // Nome do template HTML que será renderizado
+    }
 }
