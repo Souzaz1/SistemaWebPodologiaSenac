@@ -3,6 +3,7 @@ package com.senacead.Podologia.controller;
 import com.senacead.Podologia.model.Avaliacao;
 import com.senacead.Podologia.service.AvaliacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class AvaliacaoController {
     @PostMapping
     public String criarAvaliacao(@ModelAttribute Avaliacao avaliacao, @RequestParam("foto") MultipartFile foto) {
         avaliacaoService.criar(avaliacao, foto);
-        return "redirect:/avaliacoes";
+        return "redirect:/avaliacoes/lista";
     }
 
     // Exibir formulário para editar uma avaliação
@@ -48,13 +49,13 @@ public class AvaliacaoController {
     @PostMapping("/editar/{id}")
     public String atualizarAvaliacao(@PathVariable Integer id, @ModelAttribute Avaliacao avaliacao, @RequestParam("foto") MultipartFile foto) {
         avaliacaoService.atualizar(id, avaliacao, foto);
-        return "redirect:/avaliacoes";
+        return "redirect:/avaliacoes/lista";
     }
 
     // Excluir uma avaliação
-    @GetMapping("/excluir/{id}")
-    public String excluirAvaliacao(@PathVariable Integer id) {
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<Void> excluirAvaliacao(@PathVariable Integer id) {
         avaliacaoService.excluir(id);
-        return "redirect:/avaliacoes";
+        return ResponseEntity.noContent().build();
     }
 }

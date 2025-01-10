@@ -16,6 +16,8 @@ public class Avaliacao {
     private String fotoUrl;
     private LocalDateTime dataAvaliacao;
     private Integer servicoId; // ID do serviço relacionado
+    
+    
 
     // Getters e Setters
     public Integer getId() {
