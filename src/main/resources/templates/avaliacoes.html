@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Unha Encravada - Perfil dos Pés</title>
+        <title th:text="${title}">Avaliações - Perfil dos Pés</title>
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap Icons -->
@@ -44,34 +44,12 @@
             }
 
             .card {
-                background-color: #ffffff;
-                border: 1px solid #ddd;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                border-radius: 8px;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                margin-bottom: 20px;
             }
 
-            .card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            }
-
-            .card-img-top {
-                height: 200px;
-                object-fit: cover;
-                border-top-left-radius: 8px;
-                border-top-right-radius: 8px;
-            }
-
-            .card-title {
+            .star-rating {
+                color: #FFD700;
                 font-size: 1.5rem;
-                font-weight: 700;
-                color: #333;
-            }
-
-            .card-text {
-                font-size: 1rem;
-                color: #555;
             }
 
             footer {
@@ -140,6 +118,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#sobre-empresa">Sobre</a></li>
                         <li class="nav-item"><a class="nav-link" href="/servicos" th:href="@{/servicos}">Serviços</a></li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://wa.me/5511999999999" target="_blank">Contato</a>
@@ -149,52 +128,55 @@
             </div>
         </nav>
 
-        <!-- Conteúdo da página sobre Unha Encravada -->
-        <div class="container mt-5">
-            <h1 class="text-center mb-5">Unha Encravada</h1>
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <div class="card">
-                        <img src="https://www.marybeleza.com.br/dicas/wp-content/uploads/2022/01/unhas-encravadas-x-dicas-para-lidar-com-o-problema-20210611125327.jpg.jpg" class="card-img-top" alt="Unha Encravada">
-                        <div class="card-body">
-                            <h5 class="card-title">O que é Unha Encravada?</h5>
-                            <p class="card-text">
-                                A unha encravada ocorre quando a borda da unha cresce e penetra na pele ao redor, causando dor, vermelhidão e, em alguns casos, infecção. É mais comum nos dedos dos pés, especialmente no dedão, e pode ser causada por cortes inadequados das unhas, uso de calçados apertados ou predisposição genética.
-                            </p>
-                            <h5 class="card-title mt-4">Sintomas:</h5>
-                            <ul>
-                                <li>Dor e sensibilidade ao redor da unha.</li>
-                                <li>Vermelhidão e inchaço.</li>
-                                <li>Formação de pus em casos de infecção.</li>
-                                <li>Dificuldade para usar calçados.</li>
-                            </ul>
-                            <h5 class="card-title mt-4">Tratamento:</h5>
-                            <p class="card-text">
-                                O tratamento da unha encravada pode incluir:
-                            </p>
-                            <ul>
-                                <li><strong>Mergulhar os pés em água morna:</strong> Para aliviar a dor e reduzir o inchaço.</li>
-                                <li><strong>Uso de antibióticos:</strong> Em casos de infecção, prescritos por um médico.</li>
-                                <li><strong>Elevação da unha:</strong> Um profissional pode levantar a unha e colocar um pedaço de algodão ou fio dental para ajudar a corrigir o crescimento.</li>
-                                <li><strong>Cirurgia:</strong> Em casos graves, pode ser necessário remover parte ou toda a unha.</li>
-                            </ul>
-                            <h5 class="card-title mt-4">Prevenção:</h5>
-                            <ul>
-                                <li>Corte as unhas retas, sem arredondar os cantos.</li>
-                                <li>Use calçados confortáveis e que não apertem os dedos.</li>
-                                <li>Mantenha os pés limpos e secos.</li>
-                                <li>Evite cortar as unhas muito curtas.</li>
-                            </ul>
-                            <div class="text-center mt-4">
-                                <a href="https://wa.me/5511999999999" class="btn btn-primary btn-whatsapp" target="_blank">
-                                    <i class="bi bi-whatsapp"></i> Agende uma Consulta
-                                </a>
+        <!-- Corpo da Página (Avaliações) -->
+        <section class="section">
+            <div class="container">
+                <h2 class="text-center mb-5">Avaliações dos Clientes</h2>
+
+                <!-- Formulário para Adicionar Avaliação -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Deixe sua Avaliação</h5>
+                        <form th:action="@{/avaliacoes}" method="post" enctype="multipart/form-data" id="formAvaliacao">
+                            <div class="mb-3">
+                                <label for="nomeCliente" class="form-label">Seu Nome</label>
+                                <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="estrelas" class="form-label">Avaliação (1-5 estrelas)</label>
+                                <input type="number" class="form-control" id="estrelas" name="estrelas" min="1" max="5" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comentario" class="form-label">Comentário</label>
+                                <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="foto" class="form-label">Enviar Foto (opcional)</label>
+                                <input type="file" class="form-control" id="foto" name="foto" accept="image/png, image/jpeg">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Lista de Avaliações -->
+                <div th:each="avaliacao : ${avaliacoes}" class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${avaliacao.nomeCliente}"></h5>
+                        <div class="star-rating">
+                            <span th:each="i : ${#numbers.sequence(1, 5)}">
+                                <i th:class="${i <= avaliacao.estrelas} ? 'bi bi-star-fill' : 'bi bi-star'"></i>
+                            </span>
                         </div>
+                        <p class="card-text" th:text="${avaliacao.comentario}"></p>
+                        <p class="text-muted" th:text="${avaliacao.dataAvaliacao}"></p>
+
+                        <!-- Exibição da Foto (se existir) -->
+                        <img th:if="${avaliacao.fotoUrl}" th:src="@{${avaliacao.fotoUrl}}" class="img-fluid" alt="Foto do cliente">
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Footer -->
         <footer>
@@ -232,5 +214,8 @@
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- JavaScript Personalizado (Arquivo Externo) -->
+        <script src="scripts.js"></script>
     </body>
 </html>

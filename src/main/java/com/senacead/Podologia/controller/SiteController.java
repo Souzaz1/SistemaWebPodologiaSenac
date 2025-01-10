@@ -5,14 +5,20 @@
 package com.senacead.Podologia.controller;
 
 import com.senacead.Podologia.model.CarouseItem;
+import com.senacead.Podologia.model.Avaliacao;
+import com.senacead.Podologia.service.AvaliacaoService;
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 
 @Controller
 public class SiteController {
+
+    @Autowired
+    private AvaliacaoService avaliacaoService;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -120,5 +126,13 @@ public class SiteController {
         model.addAttribute("title", "Verruga Plantar - Tratamento e Cuidados");
         model.addAttribute("description", "A verruga plantar é uma lesão causada pelo vírus HPV que aparece na sola dos pés. Conheça os sintomas, tratamentos e prevenção.");
         return "VerrugaPlantar"; // Nome do template HTML que será renderizado
+    }
+
+    // Método para exibir a página de avaliações
+    @GetMapping("/avaliacoes")
+    public String avaliacoes(Model model) {
+        model.addAttribute("title", "Avaliações dos Clientes");
+        model.addAttribute("avaliacoes", avaliacaoService.buscarTodas()); // Busca todas as avaliações
+        return "avaliacoes"; // Nome do template HTML que será renderizado
     }
 }
